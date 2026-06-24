@@ -308,9 +308,13 @@ export default function Projects() {
   // Calculate dynamic camera height translation (elevates the view slightly as we look down)
   const rawContainerTranslateY = useTransform(rawDistance, [0, 0.5], [0, 22]);
 
+  // Calculate dynamic camera zoom (zooms out when scrolling between cards, zooms in when focused)
+  const rawContainerScale = useTransform(rawDistance, [0, 0.5], [1, 0.75]);
+
   const springConfig = { damping: 25, stiffness: 120 };
   const containerRotateX = useSpring(rawContainerRotateX, springConfig);
   const containerTranslateY = useSpring(rawContainerTranslateY, springConfig);
+  const containerScale = useSpring(rawContainerScale, springConfig);
 
   const allProjectsList: Project[] = [
     {
@@ -685,7 +689,8 @@ export default function Projects() {
               perspective: 1200, 
               transformStyle: "preserve-3d",
               rotateX: containerRotateX,
-              y: containerTranslateY
+              y: containerTranslateY,
+              scale: containerScale
             }}
             className="h-[580px] w-full max-w-7xl mx-auto flex items-center justify-center relative mb-12 overflow-visible"
           >
