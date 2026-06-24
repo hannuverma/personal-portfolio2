@@ -5,4 +5,21 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'vendor-react';
+          }
+          if (id.includes('node_modules/framer-motion/') || id.includes('node_modules/motion/')) {
+            return 'vendor-motion';
+          }
+          if (id.includes('node_modules/lucide-react/') || id.includes('node_modules/react-icons/')) {
+            return 'vendor-ui';
+          }
+        }
+      }
+    }
+  }
 })

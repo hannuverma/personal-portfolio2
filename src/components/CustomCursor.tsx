@@ -38,9 +38,9 @@ const CustomCursor = () => {
     const handleEnter = () => setIsVisible(true);
 
     document.body.classList.add('custom-cursor-active');
-    window.addEventListener('mousemove', moveCursor);
-    document.addEventListener('mouseleave', handleLeave);
-    document.addEventListener('mouseenter', handleEnter);
+    window.addEventListener('mousemove', moveCursor, { passive: true });
+    document.addEventListener('mouseleave', handleLeave, { passive: true });
+    document.addEventListener('mouseenter', handleEnter, { passive: true });
 
     return () => {
       document.body.classList.remove('custom-cursor-active');

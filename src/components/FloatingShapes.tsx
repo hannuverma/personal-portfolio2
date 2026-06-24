@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface Node3D {
   x: number;
@@ -128,10 +128,10 @@ export default function FloatingShapes() {
       });
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("click", handleCanvasClick);
-    document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    canvas.addEventListener("click", handleCanvasClick, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
 
     const draw = () => {
       // Scale all drawing operations on high-DPI displays

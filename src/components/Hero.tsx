@@ -1,8 +1,10 @@
-﻿import type { MouseEvent } from "react";
+import { Suspense, lazy } from "react";
+import type { MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Terminal, Sparkles, Cpu } from "lucide-react";
 import { useCursor } from "../context/CursorContext";
-import FloatingShapes from "./FloatingShapes";
+
+const FloatingShapes = lazy(() => import("./FloatingShapes"));
 
 export default function Hero() {
   const { setVariant, resetVariant } = useCursor();
@@ -55,8 +57,10 @@ export default function Hero() {
       id="hero"
       className="relative min-h-[95vh] flex items-center justify-center pt-24 overflow-hidden px-6"
     >
-      {/* Dynamic particles & wireframe backdrop */}
-      <FloatingShapes />
+      {/* Dynamic particles & wireframe backdrop - Lazy Loaded to prevent TBT spikes */}
+      <Suspense fallback={<div className="absolute inset-0 bg-[#0a0a0f] pointer-events-none" />}>
+        <FloatingShapes />
+      </Suspense>
 
       {/* Decorative top ambient radial glow */}
       <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[70vw] h-[300px] rounded-full bg-orange-500/5 blur-[120px] pointer-events-none" />
