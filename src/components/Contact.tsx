@@ -220,6 +220,13 @@ export default function Contact() {
                       </>
                     )}
                   </button>
+                  {status && status !== 'completed' && (
+                    <div className="mt-4 p-3 border border-red-500/30 bg-red-500/10 rounded-lg">
+                      <p className="text-red-400 text-xs font-mono text-center">
+                        {status}
+                      </p>
+                    </div>
+                  )}
                 </motion.form>
               )}
             </AnimatePresence>
