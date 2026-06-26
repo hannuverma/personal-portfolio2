@@ -9,17 +9,41 @@ export default function Contact() {
   const { setVariant, resetVariant } = useCursor();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formState, setFormState] = useState<"idle" | "transmitting" | "completed">("idle");
+  const [status, setStatus] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setFormState("transmitting");
-    setTimeout(() => {
-      setFormState("completed");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setFormState("idle"), 4000);
-    }, 1500);
+    setStatus("");
+
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok && result.success) {
+        setFormState("completed");
+        setStatus('completed');
+        setFormData({ name: '', email: '', message: '' });
+        
+        // Reset form to idle after success
+        setTimeout(() => {
+          setFormState("idle");
+          setStatus("");
+        }, 3000);
+      } else {
+        setFormState("idle");
+        setStatus(`Failed to send: ${result.error || "Unknown error"}`);
+      }
+    } catch (err) {
+      setFormState("idle");
+      setStatus('An error occurred. Please try again.');
+    }
   };
 
   const socialLinks = [

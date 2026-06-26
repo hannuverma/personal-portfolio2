@@ -96,7 +96,7 @@ export default function Hero() {
           >
             Hi, I'm a <br />
             <span className="text-gradient-orange-purple font-extrabold relative">
-              Full-Stack & 3D
+              Full-Stack
             </span>{" "}
             Developer.
           </motion.h1>
@@ -107,7 +107,7 @@ export default function Hero() {
             className="text-zinc-400 font-sans text-base md:text-lg max-w-2xl leading-relaxed mb-8 flex flex-col gap-2"
           >
             <span>
-              I am a pursuing computer science engineering student designing highly efficient 3D WebGL architectures, robust and reactive web environments, and production-grade artificial intelligence systems.
+              I am a pursuing computer science engineering student designing highly efficient backend architectures, robust and reactive web environments, and production-grade artificial intelligence systems.
             </span>
             <span className="text-zinc-500 text-sm font-mono mt-2 flex items-center gap-2">
               <Terminal className="w-4 h-4 text-orange-500/80" /> node process: active.sh --optimization=max
